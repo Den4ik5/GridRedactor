@@ -1,0 +1,14 @@
+<form [formGroup]="gridForm" (ngSubmit)="getJsonData()">
+  <input style="width: 300px" type="text" formControlName="JSON" placeholder="enter smth">
+  <button type="submit" [disabled]="!gridForm.valid">Загрузить</button>
+</form>
+<div class="grid" *ngFor="let el of mockData; index as i">
+  <span>name: {{el.name}}</span>
+  <span>year: {{el.year}}</span>
+  <button type="submit" (click)="edit(i)">изменить</button>
+  <button type="submit" (click)="erase(i)">удалить</button>
+  <form *ngIf="selectedRow === i" [formGroup]="editForm">
+    <input type="text" formControlName="NAME" placeholder="enter name" value="{{mockData[i].name}}">
+    <input type="text" formControlName="YEAR" placeholder="enter year" value="{{mockData[i].year}}">
+  </form>
+</div>
